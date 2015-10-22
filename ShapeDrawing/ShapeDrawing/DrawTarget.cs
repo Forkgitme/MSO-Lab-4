@@ -1,29 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Drawing;
 
-namespace ShapeDrawing
+public abstract class DrawTarget
 {
-    public abstract class DrawTarget
+    public DrawTarget()
     {
-        public abstract void draw();
     }
 
-    public class DrawCSharp
-    {
-        public void draw(Graphics canvas)
-        {
+    public abstract void drawLines(Point[] points, Graphics canvas);
 
-        }
-    }
-
-    public class DrawSVG
-    {
-        public void draw()
-        {
-
-        }
-    }
+    public abstract void drawEllipse(Point location, int diameter, Graphics canvas);
 }

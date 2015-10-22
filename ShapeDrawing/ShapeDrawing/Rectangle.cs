@@ -23,11 +23,17 @@ class Rectangle : Shape
     
 	public override void Draw(Graphics Canvas)
     {
-		Pen pen = new Pen(Color.Black);
-		Canvas.DrawLine(pen,x,y,x + width,y);
-		Canvas.DrawLine(pen,x+width,y,x+width,y+height);
-		Canvas.DrawLine(pen,x+width,y+height,x,y+height);
-		Canvas.DrawLine(pen,x,y+height,x,y);
+        Point[] points = new Point[4];
+        points[0] = new Point(x, y);
+        points[1] = new Point(x + width, y);
+        points[2] = new Point(x + width, y + height);
+        points[3] = new Point(x, y + height);
+        drawTarget.drawLines(points, Canvas);
+        //Pen pen = new Pen(Color.Black);
+		//Canvas.DrawLine(pen,x,y,x + width,y);
+		//Canvas.DrawLine(pen,x+width,y,x+width,y+height);
+		//Canvas.DrawLine(pen,x+width,y+height,x,y+height);
+		//Canvas.DrawLine(pen,x,y+height,x,y);
     }
 }
 

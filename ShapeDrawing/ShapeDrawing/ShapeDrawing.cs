@@ -67,31 +67,38 @@ public class ShapeDrawingForm : Form
 		if(saveFileDialog.ShowDialog() == DialogResult.OK)
 		{
 			if((stream = saveFileDialog.OpenFile()) != null)
-			{
+            {
                 //import header from a file.
-                string[] header = File.ReadAllLines(@"C:\Users\Robin\Documents\GitHub\MSO-Lab-4\ShapeDrawing\SVGHeader.svg");
-                
+                string[] header = { @"<?xml version =""1.0"" standalone=""no""?>", @"<!DOCTYPE svg PUBLIC ""-//W3C//DTD SVG 1.1//EN"" ""http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"">", @"<svg xmlns=""http://www.w3.org/2000/svg"" version=""1.1"">" };
                 //import the SVG shapes.
-                
+
 
                 using (StreamWriter writer = new StreamWriter(stream))
                 {
-                    foreach(string headerLine in header)
+                    foreach (string headerLine in header)
                     {
                         writer.WriteLine(headerLine);
                     }
 
-
+                    foreach(Shape shape in shapes)
+                    {
+                        shape.drawTarget = new DrawSVG();
+                        shape.Draw();
+                        writer.WriteLine(shape.useShape);
+                    }
                     writer.WriteLine("</svg>");
-                }				
-			}
-		}
+                }
+            }
+        }
 	}
 
     private void OnPaint(object sender, PaintEventArgs e)
 	{
 		// Draw all the shapes
 		foreach(Shape shape in shapes)
-			shape.Draw(e.Graphics);
+        {
+            shape.drawTarget = new DrawCSharp();
+            shape.Draw(e.Graphics);
+        }		
 	}
 }

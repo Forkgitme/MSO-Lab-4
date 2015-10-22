@@ -22,9 +22,8 @@ public class Star : Shape
 
 	public override void Draw (Graphics Canvas)
 	{
-		Pen pen = new Pen (Color.Black);
 
-		int numPoints = 5;
+        int numPoints = 5;
 		Point[] pts = new Point[numPoints];
 		double rx = width / 2;
 		double ry = height / 2;
@@ -42,13 +41,7 @@ public class Star : Shape
 			theta += dtheta;
 		}
 
-		for (i = 0; i < numPoints; i++) 
-		{
-			Canvas.DrawLine(pen,pts[i].X,
-                                pts[i].Y,
-                                pts[(i+1) % numPoints].X,
-                                pts[(i+1) % numPoints].Y);
-		}
+        drawTarget.drawLines(pts, Canvas);
 		
 	}
 }
