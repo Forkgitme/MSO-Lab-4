@@ -68,12 +68,21 @@ public class ShapeDrawingForm : Form
 		{
 			if((stream = saveFileDialog.OpenFile()) != null)
 			{
-				// Insert code here that generates the string of SVG
-                //   commands to draw the shapes
-                using(StreamWriter writer = new StreamWriter(stream))
+                //import header from a file.
+                string[] header = File.ReadAllLines(@"C:\Users\Robin\Documents\GitHub\MSO-Lab-4\ShapeDrawing\SVGHeader.svg");
+                
+                //import the SVG shapes.
+                
+
+                using (StreamWriter writer = new StreamWriter(stream))
                 {
-                        // Write strings to the file here using:
-                        //   writer.WriteLine("Hello World!");
+                    foreach(string headerLine in header)
+                    {
+                        writer.WriteLine(headerLine);
+                    }
+
+
+                    writer.WriteLine("</svg>");
                 }				
 			}
 		}
